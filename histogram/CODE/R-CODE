@@ -1,0 +1,22 @@
+##HISTOGRAM 
+##to form histogram we need to convert the data into groups i.e range/bins 
+#eg- 10-20,21-30,31-40
+#Insert the csv file of FLOW CYTOMETRY from KAGGLE
+f <- read.csv("/home/akanksha/Music/probability/rituximab.csv")
+#plot a histogram with the FL2.H without the change in the bin
+hist(f$FL2.H , xlim = c(0,800) , ylim = c(0,500), ylab = "count" , main = "" , las = 1)
+#use freedman-Diaconis(FD) rule , which is used to calculate the optimum number of bins for the histogram
+hist(f$FL2.H , xlim = c(0,800) , ylim = c(0,300), ylab = "count" , main = "" , las = 1 , breaks = "FD")
+#function = abline is used to add a line of mea,median in the given graph
+abline(v = mean(f$FL2.H) , lwd = 2 , col = "blue")
+abline(v = median(f$FL2.H) , lwd = 2 , col = "red")
+# the count  can be changed into frequency / density / percentage
+h <- hist(f$FL2.H , plot = FALSE)
+h$density <- h$counts*100/sum(h$counts)
+plot(h ,
+     xlim = c(0,800),
+     ylim = c(0,500),
+     ylab = "% of cells",
+     main = "",
+     las = 1 , 
+     col = "mistyrose")

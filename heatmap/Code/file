@@ -1,0 +1,13 @@
+#HEAT MAP FOR MICROARAY DATASET GOT FROM KAGGLE
+#IMPORT THE DATASET FROM THE DOWLOADS FOLDER
+micro <- read.csv("/home/akanksha/Downloads/micro.csv", row.names = 1)
+#change the class of the dataset from dataframe to matrix as heatmap only recogise data as matrix
+sor_data <- data.matrix(micro)
+#plot the heatmap usig function heatmap without dendrogram
+heatmap(sor_data[1:15,] , Rowv = NA ,Colv = NA)
+#plot heatmap with dendrogram
+heatmap(sor_data[1:15,])
+#heatmap with scaling
+heatmap(sor_data[1:15,],scale = "column")
+#heatmap without column dendrogram
+heatmap(sor_data[1:15,],Colv = NA , scale = "column")

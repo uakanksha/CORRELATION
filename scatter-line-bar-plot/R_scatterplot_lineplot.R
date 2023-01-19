@@ -1,0 +1,34 @@
+#Scatter plot
+#To create a scatter plot on the dataset = DNNase
+##Import the dataset
+d <- DNase
+#plot a scatter plot with the entire dataset
+plot(density ~ conc , d)
+#Plot the dataset after taking the mean of the conc with therespective rounds
+agg<-aggregate(density ~ conc, d, mean)
+
+plot(agg$conc,agg$density ,  
+     xlab = "conc",
+     ylab = "absorbance",
+     pch = 19,
+     col = "pink",
+     cex=2,
+     xlim = c(0,14),
+     ylim = c(0,2))
+##TO plot a scatter plot with line
+#imported a datset in the data.frame class
+z <- read.csv("zz.csv")
+#Rename the column names of the dataset  (zz) and create a dummy dataset (conc_dataset)
+zz <- rename(z, conc=weight , ab_1=Time,ab_2=Chick,ab_3=Diet)
+conc_dataset <- zz
+#convert all the zeros in the entire dataset to N/A i.e it is only in the 2nd coloumn
+conc_dataset$ab_1 [conc_dataset$ab_1 == "0"] <- 'N/A'
+#change the class of the dataset i.e numeric
+conc_dataset[] <- as.numeric(unlist(conc_dataset))
+#get the mean of all the absorbance columns
+mean.conc<-rowMeans(conc_dataset[,2:4] , na.rm = TRUE) #na.rm is used to neglect the N/A values whi;e taking the mean of the of the columns
+#Now plot the scatter plot of the mean values and the conc in the dataset
+plot(mean.conc , zz$conc ,col="pink")
+
+# To join the scatter plot graph with lines , use an attribute in the plot functione i.e type=b in which b stands for both i.e both dot and the line in the graph
+plot(mean.conc , zz$conc ,xlab = "mean of the absorbance used in all the 3 observations" , ylab = "concentration" , col = "green" , type = "b" , pch = 3 , cex.axis = 1.5 ) 

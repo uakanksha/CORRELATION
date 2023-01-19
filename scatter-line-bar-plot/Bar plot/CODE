@@ -1,0 +1,22 @@
+#bar plot for variable values 
+### THE DATA SHOULD BE IN THE MATRIX FORMAT
+## Import a dataset (flow cytometry data) in the xlsx format 
+#certain drug can cause cell cycle arrest or not , check the percentage of cells in different phases of cell cycle
+library("readxl")    # to read the excel file 
+data <- read_excel("/home/akanksha/Downloads/Book.xlsx")
+#make the bar plot of the untreated sample
+d.un <- data[1,2:5]
+class(d.un)
+#change the class of the d.un from data.fram to data.matrix
+d.un <- data.matrix(d.un)
+class(d.un)
+#plot the bar plot for the untreated by using function = bar plot
+barplot(d.un , col = "grey" ,xlab = "Phases of cell cycle" , ylab = "percentage of the cells", ylim = c(0,70))
+#in the plot we have 4 categories i.e sub_G0....G2.M
+
+#To get all the data in a single bar plot
+da.1 <- data[,2:5]
+#convert the data into a matrix
+da.1 <- data.matrix(da.1)
+mycol <- c("azure","aquamarine3","mistyrose")
+barplot(da.1 ,col = mycol ,ylab = "percentage of cells in a phase" , ylim = c(0,150) , beside = TRUE , legend.text = c("untreated", "drug_A" , "drug_B"))
